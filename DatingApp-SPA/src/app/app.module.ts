@@ -35,6 +35,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -78,7 +79,7 @@ export class TimeAgoExtendsPipe extends TimeAgoPipe {}
       FileUploadModule,
       JwtModule.forRoot({
          config: {
-            tokenGetter: tokenGetter,
+            tokenGetter,
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
@@ -93,7 +94,8 @@ export class TimeAgoExtendsPipe extends TimeAgoPipe {}
       UserService,
       AuthGuard,
       MemberEditResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent
